@@ -11,8 +11,33 @@ new Vue({
 
   // Anything within the ready function will run when the application loads
   mounted: function () {
-    //this.fetchThings();
-    console.log("READY!!!");
+    console.log("Iniciado!!!");
+    this.fetchThings();
+  },
+
+  beforeCreate: function() {
+    console.log("beforeCreate");
+
+    var storageThings = [
+      {
+        id: 1,
+        name: 'Cosa 0',
+        description: 'Descripcion 0.',
+        date: '2011-11-11'
+      },
+      {
+        id: 2,
+        name: 'Cosa 222',
+        description: 'Descripcion 1.',
+        date: '2012-12-12'
+      }
+    ];
+
+    if(localStorage["storageThings"] == null || localStorage["storageThings"].length == 0){
+      console.log("localStorage esta vacio")
+      localStorage["storageThings"] = JSON.stringify(storageThings);
+      this.$set(this, 'things', localStorage["storageThings"]);       //this = contenedor id="things", things = array inicializado en data
+    }
   },
 
   // Methods we want to use in our application are registered here
@@ -22,34 +47,42 @@ new Vue({
       var things = [
         {
           id: 1,
-          name: 'Thing 1',
-          description: 'Description 1.',
+          name: 'Cosa 1',
+          description: 'Descripcion 1.',
           date: '2011-11-11'
         },
         {
           id: 2,
-          name: 'Thing 2',
-          description: 'Description 2.',
+          name: 'Cosa 2',
+          description: 'Descripcion 2.',
           date: '2012-12-12'
-        },
+        }
       ];
+
+      var storageThings = JSON.parse(localStorage["storageThings"]);  // en localStorage solo se puede guardar strings asi que se parsea
       // $set is a convenience method provided by Vue that is similar to pushing
       // data onto an array
-      this.$set('things', things);
+      // Asincrono
+      this.$set(this, 'things', things);       //this = contenedor id="things", things = array inicializado en data
+      //this.$set(this, 'things', storageThings); // muestra el array de localStorage
     },
     // Adds a thing to the existing things array
     addThing: function() {
       if(this.thing.name) {
         this.things.push(this.thing);
-        this.thing = { name: '', description: '', date: '' };
+        this.thing = { name: '', description: '', date: '' }; //Inicializamos el objeto para la siguiente cosa y limpiar el formulario
+      }else{
+        this.thing = { error: "cubre el nombre"};
       }
     },
 
     deleteThing: function(index) {
-      if(confirm("Are you sure you want to delete this thing?")) {
-        // $remove is a Vue convenience method similar to splice
-        this.things.splice(index);
-      }
+      console.log("Borrando elemento: "+index);
+      this.$delete(this.things,index);   // es asincrono
+    },
+
+    updateThing: function() {
+      console.log("Funcion update");
     }
 
   }
