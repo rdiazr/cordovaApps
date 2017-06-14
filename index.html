@@ -11,7 +11,7 @@
   <!-- navigation bar -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
-      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i>He visto cosas...</a>
+      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i> He visto cosas...</a>
     </div>
   </nav>
 
@@ -42,8 +42,10 @@
                   <div class="form-group">
                     <input type="date" class="form-control" placeholder="Fecha" v-model="thing.date">
                   </div>
-
-                  <button class="btn btn-primary" v-on:click="addThing">Añadir</button>
+                  <!--poner un flag para ocultar/desocultar el boton con v-if= -->
+                  <button class="btn btn-primary" id="add" v-on:click="addThing">Añadir</button>
+                  <button class="btn btn-warning" id="updateb" v-on:click="updateThing">Actualizar</button>
+                  <button class="btn btn-info" v-on:click="clearStorage">Clear</button>
 
                   <h5>
                     <i class="glyphicon glyphicon-remove-circle" v-if="thing.error"></i>
@@ -75,7 +77,7 @@
           <p class="list-group-item-text" v-if="thing.description">{{ thing.description }}</p>
           <hr>
           <button class="btn btn-xs btn-danger" v-on:click="deleteThing(index)">Borrar</button>
-          <button class="btn btn-xs btn-warning" v-on:click="updateThing(index)">Actualizar</button>
+          <button class="btn btn-xs btn-warning" v-on:click="chargeThing(index)">Actualizar</button>
         </a>
 
       </div>
