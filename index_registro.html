@@ -1,0 +1,76 @@
+<html>
+<head>
+  <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' openyapi.servotal.com 'unsafe-eval';
+                                                    script-src 'self' openyapi.servotal.com 'unsafe-inline' 'unsafe-eval';
+                                                    object-src *;
+                                                    style-src 'self' data: 'unsafe-inline';
+                                                    img-src 'self' data:;
+                                                    media-src 'self' data:;
+                                                    font-src 'self' data:;
+                                                    connect-src *">
+  <title>Vue</title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+
+  <!-- navigation bar -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <a class="navbar-brand"><i class="glyphicon glyphicon-bullhorn"></i> He visto cosas...</a>
+    </div>
+  </nav>
+
+  <!-- main body of our application -->
+  <div class="container" id="things">
+
+    <!-- add a thing form -->
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Registro</h3>
+        </div>
+        <div class="panel-body">
+                <!-- CONTENT START -->
+                <div class="panel-heading">
+                  <h3>Registro</h3>
+                </div>
+                <div class="panel-body">
+
+                  <div class="form-group">
+                    <input class="form-control" placeholder="version" v-model="thing.version">
+                  </div>
+
+                  <div class="form-group">
+                    <input class="form-control" placeholder="41.3941772" v-model="thing.lat">
+                  </div>
+
+                  <div class="form-group">
+                    <input class="form-control" placeholder="2.2002508" v-model="thing.lng">
+                  </div>
+
+                  <div class="form-group">
+                    <input class="form-control" placeholder="registerid" v-model="thing.registerid">
+                  </div>
+
+                  <button class="btn btn-primary" id="register" v-on:click="registerThing">Registrar</button>
+
+                </div>
+                <!-- CONTENT END -->
+        </div>
+
+      </div>
+    </div>
+
+</div>
+
+
+  <!-- JS -->
+  <script src="node_modules/vue/dist/vue.js"></script>
+  <script src="node_modules/vue-resource/dist/vue-resource.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
+

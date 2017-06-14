@@ -19,6 +19,46 @@ new Vue({
   beforeCreate: function() {
     console.log("beforeCreate");
 
+    /*
+    `POST /openyapi.servotal.com/clientregister`
+    Accept: application/hal+json
+    Content-Type: application/json
+
+    ####Request
+      {
+          "osversion":"Mac OS X 10.7.5 (11G63)",
+          "lat": "41.3941772",
+          "lng": "2.2002508",
+          "registerid":"111"
+      }
+      */
+
+      var jsonData = {
+          "osversion":"Ultimo_PC)",
+          "lat": "41.3941772",
+          "lng": "2.2002508",
+          "registerid":"rdiazr-12345"
+      };
+
+      this.$http.post('http://openyapi.servotal.com/clientregister', jsonData, {
+        method: "POST",
+        headers: {
+         'Accept': "application/json",
+         'Content-Type':'application/json',
+         'Access-Control-Allow-Origin': "*",
+         //'Access-Control-Allow-Credentials':'true',
+        //'Access-Control-Allow-Methods':'POST',
+       }
+     }).then(response => {
+        console.log("llegada");
+
+
+        }, response => {
+          // error callback
+          console.log("llegada erronea");
+        });
+
+
     var storageThings = [
       {
         id: 1,
@@ -95,11 +135,6 @@ new Vue({
       var name = this.thing.name;
       var description = this.thing.description;
 
-
-/*
-MODO asincrono
-this.$set(this.things,index,this.thing)
-*/
       storageThings.forEach(function(v,i) {
          if(storageThings[i].name === name){
            storageThings[i].description = description;
@@ -113,6 +148,11 @@ this.$set(this.things,index,this.thing)
     clearStorage: function() {
       this.things = [];
       localStorage.clear();
+    },
+
+    registerThing: function() {
+      console.log("Registro: ");
+
     }
 
   }
